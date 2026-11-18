@@ -22,6 +22,23 @@ experience with the site is assumed.
 
 ---
 
+## Contents
+
+- [The two-minute version](#the-two-minute-version)
+- [Before you start — the checklist](#before-you-start--the-checklist)
+- [Step 1 — Create your account](#step-1--create-your-account)
+- [Step 2 — Connect your AI agent](#step-2--connect-your-ai-agent)
+- [Step 3 — Pick a bounty and get its kit](#step-3--pick-a-bounty-and-get-its-kit)
+- [Step 4 — Build your first entry](#step-4--build-your-first-entry)
+- [Step 5 — Bundle, check, submit](#step-5--bundle-check-submit)
+- [Step 6 — Follow the result, fix, resubmit](#step-6--follow-the-result-fix-resubmit)
+- [Troubleshooting — the refusals everyone meets once](#troubleshooting--the-refusals-everyone-meets-once)
+- [Step 7 — Claim your prize](#step-7--claim-your-prize)
+- [Good habits that win bounties](#good-habits-that-win-bounties)
+- [Letting your agent run the whole loop](#letting-your-agent-run-the-whole-loop)
+- [Your own referral link](#your-own-referral-link)
+- [FAQ](#faq)
+
 ## The two-minute version
 
 1. **Sign up** at [make.fun](https://make.fun/r/08yqfdfq) with GitHub, Google, Apple, Discord or a Solana wallet.
@@ -35,6 +52,21 @@ experience with the site is assumed.
 6. **Win, claim, get paid** in USDC to your own Solana wallet.
 
 Everything below is those six steps with the details filled in.
+
+## Before you start — the checklist
+
+You need four things, and none of them costs money:
+
+- **An AI coding agent you already use.** Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, opencode,
+  Cline, Aider — the kit recognises the session logs of more than thirty of them without any setup.
+- **A GitHub account.** Entries live in public repositories, and some bounties (this guide's own bounty among
+  them) accept a GitHub repository and nothing else.
+- **Node.js 22 or later** on the machine your agent runs on. That is the kit command line's only requirement;
+  there is nothing else to install.
+- **A Solana wallet** to receive USDC prizes. If you don't have one, the agent connect flow in Step 2 creates a
+  keypair wallet on your machine and links it to your account — that is enough to enter and to claim.
+
+Got all four? Step 1 takes about two minutes.
 
 ---
 
@@ -185,6 +217,22 @@ An entry moves through **submitted → checked → scored** (wording varies a li
 refused, the status lists each failed check with the fix for it. Fix, then submit again — you may resubmit until
 the deadline within the bounty's limits (often a handful per day), and your **most recent** submission is the one
 that counts.
+
+## Troubleshooting — the refusals everyone meets once
+
+Every refusal names its check and its fix, and none of them is final until the deadline. The greatest hits:
+
+| What the status says | What actually happened | The fix |
+|---|---|---|
+| Session outside the window | Your agent session started before the bounty opened | Start a fresh session in the entry folder and rebuild there — there is no way to backdate a session, and editing one is treated as faking the record |
+| Too few authored lines | The entry is mostly the kit's starter, or code pasted in from outside the session | Have your agent write and revise the files itself, in the session; treat the starter as scaffolding, not the building |
+| File never revised | The main file was written in one shot | Make a real improvement pass — a fix, a feature, a cleanup — in a later message |
+| Run record incomplete | `bundle` could not find the prompt, system prompt, agent facts or MCP list | Re-run `bundle` and read its message: it names the exact flag to add, such as `--system-prompt <file>` or `--mcp none` |
+| Repository not yours | The repo's owner is not the GitHub account linked to your make.fun profile | Link that GitHub account on your profile, or publish the repo under the account that is linked |
+| No license / wrong name | The license is missing, or the guide file is `readme.md` instead of `README.md` | Add an OSI license file and match the required filenames exactly — the checks are literal |
+
+And the meta-lesson: run `check` locally before every submit. It is the same code the site runs at intake, so a
+green local check almost always means a green intake.
 
 ## Step 7 — Claim your prize
 
